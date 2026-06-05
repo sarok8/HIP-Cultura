@@ -153,11 +153,9 @@ const CONFIG = {
   peu: "24 preguntes · 4 per vector · escala 1–4",
 
   // LOGO:
-  // Opció 1 (per defecte): logo dibuixat en SVG, no cal cap fitxer.
-  // Opció 2: posa el teu logo a la carpeta "public" (p. ex. public/logo.png)
-  //          i escriu aquí la ruta -> logoSrc: "logo.png"
-  //          Deixa-ho a null per fer servir el logo SVG per defecte.
-  logoSrc: null,
+  // Fa servir el logo oficial d'ADHOC Cultura (public/logo.png).
+  // Per canviar-lo, substitueix el fitxer public/logo.png o posa la ruta d'un altre.
+  logoSrc: "logo.png",
 };
 /* ▲▲▲  FI DE LA CONFIGURACIÓ EDITABLE  ▲▲▲ */
 
@@ -168,24 +166,38 @@ function Logo() {
       <img
         src={CONFIG.logoSrc}
         alt="ADHOC Cultura"
-        style={{ height: 56, width: "auto", display: "block", marginBottom: 8 }}
+        style={{ height: 72, width: "auto", display: "block", marginBottom: 14 }}
       />
     );
   }
-  // Logo SVG per defecte (marca hexagonal + nom), substituïble pel logo oficial.
+  // Logo oficial d'ADHOC Cultura recreat en SVG (bloc negre "ADHOC" + requadre "CULTURA").
+  // Substituïble per la imatge oficial via CONFIG.logoSrc.
   return (
-    <svg width="190" height="56" viewBox="0 0 190 56" style={{ display: "block", marginBottom: 8 }}>
-      <polygon
-        points="28,6 47,17 47,39 28,50 9,39 9,17"
-        fill="none"
-        stroke="#1a1a1a"
-        strokeWidth="2.5"
-      />
-      <polygon points="28,16 37,21.5 37,32.5 28,38 19,32.5 19,21.5" fill="#9a3b3b" />
-      <text x="60" y="26" style={{ font: "700 20px 'Space Grotesk', sans-serif", fill: "#1a1a1a" }}>
+    <svg viewBox="0 0 400 180" width="180" xmlns="http://www.w3.org/2000/svg" aria-label="ADHOC Cultura" style={{ display: "block", marginBottom: 12 }}>
+      <rect x="0" y="18" width="400" height="92" rx="18" fill="#1a1a1a" />
+      <text
+        x="200"
+        y="84"
+        textAnchor="middle"
+        fontFamily="'Arial Black', Arial, sans-serif"
+        fontWeight="900"
+        fontSize="78"
+        fill="#ffffff"
+        letterSpacing="4"
+      >
         ADHOC
       </text>
-      <text x="60" y="44" style={{ font: "700 14px 'Space Mono', monospace", letterSpacing: "0.22em", fill: "#9a3b3b" }}>
+      <rect x="60" y="122" width="280" height="52" rx="12" fill="none" stroke="#1a1a1a" strokeWidth="3" />
+      <text
+        x="200"
+        y="158"
+        textAnchor="middle"
+        fontFamily="Arial, sans-serif"
+        fontWeight="400"
+        fontSize="30"
+        fill="#1a1a1a"
+        letterSpacing="10"
+      >
         CULTURA
       </text>
     </svg>
@@ -290,7 +302,7 @@ function HexRadar({ scores, size = 360 }) {
             x={x}
             y={y - 4}
             textAnchor="middle"
-            style={{ font: "700 14px 'Space Mono', monospace", fill: "#1a1a1a" }}
+            style={{ font: "700 14px 'Archivo', monospace", fill: "#1a1a1a" }}
           >
             {vec.nom}
           </text>
@@ -298,7 +310,7 @@ function HexRadar({ scores, size = 360 }) {
             x={x}
             y={y + 12}
             textAnchor="middle"
-            style={{ font: "600 12px 'Space Mono', monospace", fill: vec.color }}
+            style={{ font: "600 12px 'Archivo', monospace", fill: vec.color }}
           >
             {(scores[vec.id] ?? 0).toFixed(1)}
           </text>
@@ -382,7 +394,7 @@ export default function HIPCultura() {
   /* ----------------------------- ESTILS ----------------------------- */
   const S = {
     wrap: {
-      fontFamily: "'Space Grotesk', system-ui, sans-serif",
+      fontFamily: "'Archivo', system-ui, sans-serif",
       background: "#F4F1EA",
       color: "#1a1a1a",
       minHeight: "100vh",
@@ -390,18 +402,18 @@ export default function HIPCultura() {
     },
     inner: { maxWidth: 880, margin: "0 auto", padding: "32px 24px 80px" },
     kicker: {
-      font: "700 12px 'Space Mono', monospace",
+      font: "700 12px 'Archivo', monospace",
       letterSpacing: "0.18em",
       textTransform: "uppercase",
       color: "#9a3b3b",
     },
-    h1: { font: "700 clamp(34px,7vw,58px) 'Space Grotesk', sans-serif", lineHeight: 1.02, margin: "8px 0 16px", letterSpacing: "-0.02em" },
+    h1: { font: "800 clamp(34px,7vw,58px) 'Archivo', sans-serif", lineHeight: 1.02, margin: "8px 0 16px", letterSpacing: "-0.02em", color: "#C0392B" },
     btn: {
       background: "#1a1a1a",
       color: "#F4F1EA",
       border: "none",
       padding: "14px 26px",
-      font: "700 15px 'Space Grotesk', sans-serif",
+      font: "700 15px 'Archivo', sans-serif",
       cursor: "pointer",
       borderRadius: 2,
     },
@@ -410,7 +422,7 @@ export default function HIPCultura() {
       color: "#1a1a1a",
       border: "1.5px solid #1a1a1a",
       padding: "14px 26px",
-      font: "700 15px 'Space Grotesk', sans-serif",
+      font: "700 15px 'Archivo', sans-serif",
       cursor: "pointer",
       borderRadius: 2,
     },
@@ -425,7 +437,7 @@ export default function HIPCultura() {
           <Logo />
           <p style={S.kicker}>{CONFIG.kicker}</p>
           <h1 style={S.h1}>{CONFIG.titol}</h1>
-          <p style={{ font: "400 19px/1.55 'Space Grotesk'", maxWidth: 620, color: "#333" }}>
+          <p style={{ font: "400 19px/1.55 'Archivo'", maxWidth: 620, color: "#333" }}>
             {CONFIG.presentacio}
           </p>
 
@@ -437,7 +449,7 @@ export default function HIPCultura() {
                   background: v.color,
                   padding: "10px 16px",
                   borderRadius: 2,
-                  font: "700 14px 'Space Mono', monospace",
+                  font: "700 14px 'Archivo', monospace",
                   border: "1.5px solid #1a1a1a",
                 }}
               >
@@ -447,7 +459,7 @@ export default function HIPCultura() {
           </div>
 
           <div style={{ margin: "24px 0 32px", maxWidth: 420 }}>
-            <label style={{ font: "700 13px 'Space Mono'", display: "block", marginBottom: 8 }}>
+            <label style={{ font: "700 13px 'Archivo'", display: "block", marginBottom: 8 }}>
               NOM DE LA INSTITUCIÓ (opcional)
             </label>
             <input
@@ -457,7 +469,7 @@ export default function HIPCultura() {
               style={{
                 width: "100%",
                 padding: "12px 14px",
-                font: "400 16px 'Space Grotesk'",
+                font: "400 16px 'Archivo'",
                 border: "1.5px solid #1a1a1a",
                 borderRadius: 2,
                 background: "#fff",
@@ -477,7 +489,7 @@ export default function HIPCultura() {
             )}
           </div>
 
-          <p style={{ font: "400 13px 'Space Mono'", color: "#888", marginTop: 48 }}>
+          <p style={{ font: "400 13px 'Archivo'", color: "#888", marginTop: 48 }}>
             {CONFIG.peu}
           </p>
         </div>
@@ -518,20 +530,20 @@ export default function HIPCultura() {
               style={{
                 background: vec.color,
                 padding: "6px 14px",
-                font: "700 22px 'Space Mono'",
+                font: "700 22px 'Archivo'",
                 border: "1.5px solid #1a1a1a",
                 borderRadius: 2,
               }}
             >
               {vec.nom}
             </span>
-            <span style={{ font: "700 22px 'Space Grotesk'" }}>{vec.subtitol}</span>
-            <span style={{ font: "400 13px 'Space Mono'", color: "#888", marginLeft: "auto" }}>
+            <span style={{ font: "700 22px 'Archivo'" }}>{vec.subtitol}</span>
+            <span style={{ font: "400 13px 'Archivo'", color: "#888", marginLeft: "auto" }}>
               {vectorActual + 1} / {VECTORS.length}
             </span>
           </div>
 
-          <p style={{ font: "400 16px/1.5 'Space Grotesk'", color: "#444", maxWidth: 640, margin: "12px 0 28px" }}>
+          <p style={{ font: "400 16px/1.5 'Archivo'", color: "#444", maxWidth: 640, margin: "12px 0 28px" }}>
             {vec.descripcio}
           </p>
 
@@ -548,7 +560,7 @@ export default function HIPCultura() {
                   marginBottom: 14,
                 }}
               >
-                <p style={{ font: "500 16px/1.4 'Space Grotesk'", margin: "0 0 14px" }}>{q}</p>
+                <p style={{ font: "500 16px/1.4 'Archivo'", margin: "0 0 14px" }}>{q}</p>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {ESCALA.map((e) => (
                     <button
@@ -561,11 +573,11 @@ export default function HIPCultura() {
                         borderRadius: 2,
                         border: "1.5px solid #1a1a1a",
                         background: val === e.v ? vec.color : "#F4F1EA",
-                        font: "700 13px 'Space Grotesk'",
+                        font: "700 13px 'Archivo'",
                         transition: "background .15s",
                       }}
                     >
-                      <span style={{ display: "block", font: "700 18px 'Space Mono'" }}>{e.v}</span>
+                      <span style={{ display: "block", font: "700 18px 'Archivo'" }}>{e.v}</span>
                       {e.label}
                     </button>
                   ))}
@@ -616,7 +628,7 @@ export default function HIPCultura() {
         <FontLink />
         <div style={S.inner}>
           <p style={S.kicker}>Resultat de l'autoavaluació</p>
-          <h1 style={{ ...S.h1, fontSize: "clamp(28px,5vw,42px)" }}>
+          <h1 style={{ ...S.h1, fontSize: "clamp(28px,5vw,42px)", color: "#1a1a1a" }}>
             {nomInstitucio || "La teva institució"}
           </h1>
 
@@ -630,17 +642,17 @@ export default function HIPCultura() {
           >
             <HexRadar scores={scores} size={460} />
             <div style={{ textAlign: "center", marginTop: 8 }}>
-              <div style={{ font: "700 13px 'Space Mono'", color: "#888" }}>PUNTUACIÓ GLOBAL</div>
-              <div style={{ font: "700 64px 'Space Grotesk'", lineHeight: 1 }}>
+              <div style={{ font: "700 13px 'Archivo'", color: "#888" }}>PUNTUACIÓ GLOBAL</div>
+              <div style={{ font: "700 64px 'Archivo'", lineHeight: 1 }}>
                 {global.toFixed(1)}
-                <span style={{ font: "400 22px 'Space Mono'", color: "#888" }}> / 4</span>
+                <span style={{ font: "400 22px 'Archivo'", color: "#888" }}> / 4</span>
               </div>
             </div>
           </div>
 
           {/* recomanacions */}
           <p style={S.kicker}>On posar esforços ara</p>
-          <h2 style={{ font: "700 26px 'Space Grotesk'", margin: "6px 0 20px" }}>
+          <h2 style={{ font: "700 26px 'Archivo'", margin: "6px 0 20px" }}>
             Els teus 3 vectors més fluixos
           </h2>
           {vectorsFebles.map((v) => (
@@ -656,16 +668,16 @@ export default function HIPCultura() {
               }}
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ font: "700 17px 'Space Grotesk'" }}>
+                <span style={{ font: "700 17px 'Archivo'" }}>
                   {v.nom} · {v.subtitol}
                 </span>
-                <span style={{ font: "700 15px 'Space Mono'", color: "#9a3b3b" }}>
+                <span style={{ font: "700 15px 'Archivo'", color: "#9a3b3b" }}>
                   {v.score.toFixed(1)} / 4
                 </span>
               </div>
               <ul style={{ margin: "12px 0 0", paddingLeft: 20 }}>
                 {RECOMANACIONS[v.id].map((r, i) => (
-                  <li key={i} style={{ font: "400 15px/1.5 'Space Grotesk'", color: "#333", marginBottom: 6 }}>
+                  <li key={i} style={{ font: "400 15px/1.5 'Archivo'", color: "#333", marginBottom: 6 }}>
                     {r}
                   </li>
                 ))}
@@ -696,10 +708,10 @@ export default function HIPCultura() {
         <FontLink />
         <div style={S.inner}>
           <p style={S.kicker}>Evolució en el temps</p>
-          <h1 style={{ ...S.h1, fontSize: "clamp(28px,5vw,42px)" }}>Històric</h1>
+          <h1 style={{ ...S.h1, fontSize: "clamp(28px,5vw,42px)", color: "#1a1a1a" }}>Històric</h1>
 
           {historic.length === 0 ? (
-            <p style={{ font: "400 17px 'Space Grotesk'", color: "#666" }}>
+            <p style={{ font: "400 17px 'Archivo'", color: "#666" }}>
               Encara no hi ha avaluacions desades.
             </p>
           ) : (
@@ -716,8 +728,8 @@ export default function HIPCultura() {
                   }}
                 >
                   <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
-                    <span style={{ font: "700 16px 'Space Grotesk'" }}>{h.institucio}</span>
-                    <span style={{ font: "400 13px 'Space Mono'", color: "#888" }}>
+                    <span style={{ font: "700 16px 'Archivo'" }}>{h.institucio}</span>
+                    <span style={{ font: "400 13px 'Archivo'", color: "#888" }}>
                       {new Date(h.data).toLocaleDateString("ca-ES", {
                         day: "2-digit",
                         month: "short",
@@ -732,7 +744,7 @@ export default function HIPCultura() {
                       <span
                         key={v.id}
                         style={{
-                          font: "700 12px 'Space Mono'",
+                          font: "700 12px 'Archivo'",
                           background: v.color,
                           padding: "3px 8px",
                           borderRadius: 2,
@@ -744,7 +756,7 @@ export default function HIPCultura() {
                     ))}
                     <span
                       style={{
-                        font: "700 12px 'Space Mono'",
+                        font: "700 12px 'Archivo'",
                         background: "#1a1a1a",
                         color: "#fff",
                         padding: "3px 8px",
@@ -791,7 +803,7 @@ export default function HIPCultura() {
 function FontLink() {
   return (
     <style>{`
-      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap');
       * { box-sizing: border-box; }
       @media print {
         button { display: none !important; }
