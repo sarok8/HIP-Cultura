@@ -1,0 +1,8 @@
+Posa aquí el logo oficial d'ADHOC Cultura amb el nom: logo.png (o logo.svg)
+
+Després, obre src/HIPCultura.jsx, busca el bloc CONFIG (a dalt) i canvia:
+   logoSrc: null,
+per:
+   logoSrc: "logo.png",
+
+Mentre logoSrc sigui null, es mostra un logo SVG provisional dibuixat per codi.
